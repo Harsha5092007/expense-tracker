@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Personal Expense Tracker</title>
+    <title>Advanced Expense Tracker</title>
 
-    <!-- Connect CSS file -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -16,45 +18,67 @@
     <div class="container">
 
         <h1>Personal Expense Tracker</h1>
+        <p>Track and manage your daily expenses</p>
 
-        <p>Manage your daily expenses easily</p>
-
-        <!-- Total expense section -->
+        <!-- Total Summary -->
         <div class="summary">
             <h2>Total Expenses</h2>
             <h1 id="total">₹0.00</h1>
         </div>
 
-        <!-- Expense input form -->
+        <!-- Monthly Summary -->
+        <div class="summary">
+            <h2>Monthly Expenses</h2>
+            <h1 id="monthlyTotal">₹0.00</h1>
+        </div>
+
+        <!-- Expense Form -->
         <div class="expense-form">
 
-            <h2>Add New Expense</h2>
+            <h2>Add / Edit Expense</h2>
 
             <form id="expenseForm">
 
                 <input
                     type="text"
                     id="expenseName"
-                    placeholder="Enter expense name"
+                    placeholder="Expense name"
                     required
                 >
 
                 <input
                     type="number"
                     id="expenseAmount"
-                    placeholder="Enter amount"
+                    placeholder="Amount"
                     min="0.01"
                     step="0.01"
                     required
                 >
 
-                <button type="submit">Add Expense</button>
+                <select id="expenseCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Education">Education</option>
+                    <option value="Others">Others</option>
+                </select>
+
+                <input
+                    type="date"
+                    id="expenseDate"
+                    required
+                >
+
+                <button type="submit" id="submitButton">
+                    Add Expense
+                </button>
 
             </form>
 
         </div>
 
-        <!-- Expense list -->
+        <!-- Expense History -->
         <div class="expense-list">
 
             <h2>Expense History</h2>
@@ -63,9 +87,17 @@
 
         </div>
 
+        <!-- Expense Chart -->
+        <div class="chart-container">
+
+            <h2>Category-wise Expense Chart</h2>
+
+            <canvas id="expenseChart"></canvas>
+
+        </div>
+
     </div>
 
-    <!-- Connect JavaScript file -->
     <script type="module" src="app.js"></script>
 
 </body>

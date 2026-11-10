@@ -1,15 +1,13 @@
 
-/* Apply styling to the entire page */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f5f9;
+    background: #f2f5f9;
     margin: 0;
     padding: 20px;
 }
 
-/* Main container */
 .container {
-    max-width: 600px;
+    max-width: 750px;
     margin: 30px auto;
     background: white;
     padding: 25px;
@@ -17,70 +15,58 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Main heading */
-h1 {
+h1, h2 {
     text-align: center;
     color: #263b5e;
 }
 
-/* Paragraph */
 p {
     text-align: center;
     color: gray;
 }
 
-/* Total expense box */
 .summary {
-    background-color: #e3f2fd;
+    background: #e3f2fd;
     padding: 15px;
     text-align: center;
     border-radius: 10px;
     margin: 20px 0;
 }
 
-.summary h2 {
-    color: #263b5e;
-}
-
 .summary h1 {
     color: #087f5b;
 }
 
-/* Input form */
-.expense-form {
-    margin-top: 25px;
-}
-
-input {
-    width: 95%;
+input, select {
+    width: 100%;
     padding: 12px;
     margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
+    box-sizing: border-box;
 }
 
-/* Add button */
 button {
-    background-color: #2563eb;
+    background: #2563eb;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    margin: 4px;
 }
 
 button:hover {
-    background-color: #1d4ed8;
+    opacity: 0.85;
 }
 
-/* Expense history */
 .expense-list {
     margin-top: 25px;
 }
 
 ul {
-    padding: 0;
     list-style: none;
+    padding: 0;
 }
 
 li {
@@ -91,8 +77,32 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.edit-btn {
+    background: #d97706;
 }
 
 .delete-btn {
-    background-color: #dc2626;
+    background: #dc2626;
+}
+
+.chart-container {
+    margin-top: 30px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
