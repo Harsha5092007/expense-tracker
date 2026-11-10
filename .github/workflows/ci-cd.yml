@@ -1,0 +1,81 @@
+
+name: Expense Tracker CI-CD Pipeline
+
+# Run whenever code is pushed to main
+on:
+  push:
+    branches:
+      - main
+
+  # Allow manual execution
+  workflow_dispatch:
+
+# Give GitHub permission to deploy the website
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent overlapping deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+
+  # JOB 1: Run unit tests
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Get project files from GitHub
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Install project packages
+      - name: Install Dependencies
+        run: npm install
+
+      # Execute unit tests
+      - name: Run Tests
+        run: npm test
+
+
+  # JOB 2: Deploy website after tests pass
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: test
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      # Get project files
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Configure GitHub Pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # Upload website files
+      - name: Upload Website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      # Deploy website
+      - name: Deploy Website
+        id: deployment
+        uses: actions/deploy-pages@v4
